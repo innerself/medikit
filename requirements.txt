@@ -1,0 +1,16 @@
+asgiref==3.2.5
+attrs==19.3.0
+Django==3.0.4
+mimesis==4.0.0
+more-itertools==8.2.0
+packaging==20.3
+pluggy==0.13.1
+py==1.8.1
+pyparsing==2.4.6
+pytest==5.4.1
+pytest-django==3.8.0
+python-decouple==3.3
+pytz==2019.3
+six==1.14.0
+sqlparse==0.3.1
+wcwidth==0.1.8
