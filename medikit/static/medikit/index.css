@@ -1,0 +1,23 @@
+body {
+  display: grid;
+  padding: 25px 5% 25px 5%;
+  grid-template-columns: 1fr 8fr;
+  grid-template-rows: 0.5fr 10fr 1fr;
+  grid-gap: 25px;
+}
+
+.panel-kit {
+  grid-column: 1;
+  grid-row: 2;
+  text-align: center;
+}
+
+.drugs-list {
+  grid-column: 2 / 3;
+  grid-row: 2;
+}
+
+.expired-label {
+  color: darkred;
+  font-weight: bold;
+}

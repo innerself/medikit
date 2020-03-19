@@ -1,3 +1,11 @@
 from django.shortcuts import render
 
-# Create your views here.
+from medikit.models import Kit
+
+
+def index(request):
+    context = {
+        'kits': Kit.objects.all(),
+    }
+
+    return render(request, 'medikit/index.html', context=context)

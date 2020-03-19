@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 
 
@@ -18,3 +20,14 @@ class Drug(models.Model):
         on_delete=models.CASCADE,
         related_name='drugs',
     )
+
+    def __str__(self) -> str:
+        return self.name
+
+    @property
+    def expired(self) -> bool:
+        return (self.expiration_date - datetime.date.today()).days < 0
+
+    @property
+    def expires_in(self) -> datetime.timedelta:
+        return self.expiration_date - datetime.date.today()
