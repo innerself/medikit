@@ -6,14 +6,8 @@ body {
   grid-gap: 25px;
 }
 
-.panel-kit {
-  grid-column: 1;
-  grid-row: 2;
-  text-align: center;
-}
-
-.drugs-list {
-  grid-column: 2 / 3;
+#main {
+  grid-column: 1 / 3;
   grid-row: 2;
 }
 

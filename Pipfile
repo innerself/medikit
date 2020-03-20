@@ -10,6 +10,7 @@ django = "*"
 python-decouple = "*"
 mimesis = "*"
 pytest-django = "*"
+pytils = "*"
 
 [requires]
 python_version = "3.8"

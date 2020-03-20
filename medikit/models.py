@@ -1,17 +1,24 @@
 import datetime
 
 from django.db import models
+from pytils.translit import slugify
 
 
 class Kit(models.Model):
-    name = models.CharField(max_length=256)
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200)
 
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
 
 class Drug(models.Model):
-    name = models.CharField(max_length=256)
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200)
     description = models.TextField()
     expiration_date = models.DateField()
     added = models.DateTimeField(auto_now_add=True)
@@ -31,3 +38,7 @@ class Drug(models.Model):
     @property
     def expires_in(self) -> datetime.timedelta:
         return self.expiration_date - datetime.date.today()
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
