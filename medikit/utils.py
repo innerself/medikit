@@ -9,17 +9,15 @@ def generate_drugs(kit_name: str, quantity: int = 15) -> None:
         kit = Kit(name=kit_name)
         kit.save()
 
+    print(f'Creating {quantity} fake drugs')
+
     for _ in range(quantity):
-        drug = Drug(
+        Drug.objects.create(
             name=Food().fruit(),
             description=Text().title(),
             expiration_date=Datetime().date(start=2015, end=2025),
             kit=kit,
         )
-
-        drug.save()
-
-    print(f'Created {quantity} fake drugs')
 
     return None
 
