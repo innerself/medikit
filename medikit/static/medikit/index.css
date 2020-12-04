@@ -6,9 +6,24 @@ body {
   grid-gap: 25px;
 }
 
-#main {
+#header {
   grid-column: 1 / 3;
+  grid-row: 1;
+}
+
+#main-kits {
+  grid-column: 1;
   grid-row: 2;
+}
+
+#main-drugs {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+#footer {
+  grid-column: 1 / 3;
+  grid-row: 3;
 }
 
 .expired-label {
