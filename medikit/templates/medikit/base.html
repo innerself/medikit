@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Medikit</title>
+  <link rel="stylesheet" href="{% static 'medikit/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'medikit/css/index.css' %}">
+</head>
+<body>
+<div id="header-logo">
+  {#    <img src="{% static 'medikit/img/first-aid-kit.svg' %}" alt="medicine kit">#}
+</div>
+<div id="header-controls">
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+      <img src="{% static 'medikit/img/search.svg' %}" alt="search icon ">
+    </button>
+    <a href="{% url 'medikit:index' %}" class="btn btn-primary" role="button">Home</a>
+    <a href="{% url 'medikit:items_add' 'drug' %}" class="btn btn-success" role="button">Add drug</a>
+    <button type="button" class="btn btn-danger">Remove drug</button>
+    {#    <a href="{% url 'medikit:items_add' 'kit' %}" class="btn btn-success" role="button">Add kit</a>#}
+    <button type="button" class="btn btn-danger">Remove kit</button>
+  </form>
+</div>
+
+<div id="main-kits">
+  {% block main-kits %}
+  {% endblock %}
+</div>
+
+<div id="main-drugs">
+  {% block main-drugs %}
+  {% endblock %}
+</div>
+
+<script src="{% static "medikit/js/jquery-3.4.1.min.js" %}"></script>
+<script src="{% static "medikit/js/bootstrap.min.js" %}"></script>
+
+{% block js_scripts %}
+{% endblock %}
+
+</body>
+</html>
+
+

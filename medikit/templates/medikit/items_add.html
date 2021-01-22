@@ -1,0 +1,9 @@
+{% extends "medikit/base.html" %}
+{% block main-drugs %}
+  <h3>Add new {{ item }}</h3>
+  <form action="./{{ item }}" method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <p><input type="submit" value="Add {{ item }}"></p>
+  </form>
+{% endblock %}
