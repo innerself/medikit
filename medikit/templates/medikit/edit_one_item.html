@@ -1,0 +1,12 @@
+{% extends "medikit/base.html" %}
+{% block main-drugs %}
+  <h3>Edit {{ item_type }}</h3>
+  {% if saved %}
+    <h3>Successfully saved</h3>
+  {% endif %}
+  <form action="." method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <p><input type="submit" value="Save {{ item_type }}"></p>
+  </form>
+{% endblock %}

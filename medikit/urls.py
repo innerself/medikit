@@ -5,6 +5,8 @@ from . import views
 app_name = 'medikit'
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('add/<str:item>', views.items_add, name='items_add'),
+    path('', views.index, name='home'),
+    path('edit/<str:item_type>/', views.edit, name='edit'),
+    path('edit/<str:item_type>/<int:item_id>/', views.edit_one, name='edit_one'),
+    path('remove/<str:item_type>/<int:item_id>/', views.remove, name='remove'),
 ]

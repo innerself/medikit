@@ -16,6 +16,7 @@ body {
 #header-controls {
   grid-column: 2 / 3;
   grid-row: 1;
+  justify-self: right;
 }
 
 #main-kits {

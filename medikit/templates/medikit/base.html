@@ -13,15 +13,13 @@
 </div>
 <div id="header-controls">
   <form class="form-inline">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-      <img src="{% static 'medikit/img/search.svg' %}" alt="search icon ">
-    </button>
-    <a href="{% url 'medikit:index' %}" class="btn btn-primary" role="button">Home</a>
-    <a href="{% url 'medikit:items_add' 'drug' %}" class="btn btn-success" role="button">Add drug</a>
-    <button type="button" class="btn btn-danger">Remove drug</button>
-    {#    <a href="{% url 'medikit:items_add' 'kit' %}" class="btn btn-success" role="button">Add kit</a>#}
-    <button type="button" class="btn btn-danger">Remove kit</button>
+{#    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
+{#    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">#}
+{#      <img src="{% static 'medikit/img/search.svg' %}" alt="search icon ">#}
+{#    </button>#}
+    <a href="{% url 'medikit:home' %}" class="btn btn-primary" role="button">Home</a>
+    <a href="{% url 'medikit:edit' 'kit' %}" class="btn btn-warning" role="button">Edit kits</a>
+    <a href="{% url 'medikit:edit' 'drug' %}" class="btn btn-warning" role="button">Edit drugs</a>
   </form>
 </div>
 
