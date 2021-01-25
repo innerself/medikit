@@ -27,19 +27,23 @@ SECRET_KEY = config('SECRET_KEY', cast=str, default='some-secret-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool, default=False)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda x: [x.strip() for x in x.split(',')])
+ALLOWED_HOSTS = config(
+    'ALLOWED_HOSTS',
+    cast=lambda x: [x.strip() for x in x.split(',')],
+    default='*',
+)
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'medikit.apps.MedikitConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'medikit.apps.MedikitConfig',
 ]
 
 MIDDLEWARE = [
