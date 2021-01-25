@@ -21,6 +21,8 @@ asgiref = "==3.3.1"
 py = "==1.10.0"
 pyparsing = "==2.4.7"
 pytz = "==2020.5"
+coverage = "*"
+coveralls = "*"
 
 [requires]
 python_version = "3.8"
