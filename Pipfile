@@ -23,6 +23,7 @@ pyparsing = "==2.4.7"
 pytz = "==2020.5"
 coverage = "*"
 coveralls = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"
