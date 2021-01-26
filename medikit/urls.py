@@ -6,7 +6,7 @@ app_name = 'medikit'
 
 urlpatterns = [
     path('', views.index, name='home'),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('', include('django.contrib.auth.urls')),
     path('edit/<str:item_type>/', views.edit, name='edit'),
     path('edit/<str:item_type>/<int:item_id>/', views.edit_one, name='edit_one'),
     path('remove/<str:item_type>/<int:item_id>/', views.remove, name='remove'),
