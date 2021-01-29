@@ -1,4 +1,6 @@
-from mimesis import Food, Text, Datetime
+from django.contrib.auth import get_user_model
+from mimesis import Food, Text, Datetime, Person
+
 from .models import Kit, Medication
 
 
@@ -6,7 +8,8 @@ def generate_medicines(kit_name: str, quantity: int = 15) -> None:
     kit = Kit.objects.filter(name=kit_name).first()
 
     if not kit:
-        kit = Kit(name=kit_name)
+        user = get_user_model().objects.create(username=Person().username())
+        kit = Kit(name=kit_name, user=user)
         kit.save()
 
     print(f'Creating {quantity} fake medicines')

@@ -1,10 +1,8 @@
-from decouple import config
 from django.test import TestCase
 
 from .management.commands import generate_medicines as mgmt_generate_medicines
 from .models import Kit, Medication
 from .utils import generate_medicines
-
 
 TEST_KIT_NAME = 'Test kit'
 
