@@ -25,6 +25,7 @@ coverage = "*"
 coveralls = "*"
 gunicorn = "*"
 social-auth-app-django = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.8"
