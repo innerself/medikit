@@ -10,7 +10,7 @@ from .models import Kit, Medication
 def home(request):
     if request.user.is_authenticated:
         context = {
-            'kits': Kit.objects.filter(user_id=request.user.id),
+            'kits': Kit.objects.filter(user__id=request.user.id),
         }
         return render(request, 'medikit/dashboard.html', context)
     else:
@@ -29,7 +29,7 @@ def edit_kits(request):
     else:
         form = AddKitForm()
 
-    items = Kit.objects.filter(user_id=request.user.id)
+    items = Kit.objects.filter(user__id=request.user.id)
 
     context = {
         'form': form,
@@ -57,7 +57,7 @@ def edit_medications(request):
     else:
         form = AddMedicationForm(user_id=request.user.id)
 
-    current_user_kits = Kit.objects.filter(user_id=request.user.id)
+    current_user_kits = Kit.objects.filter(user__id=request.user.id)
     items = Medication.objects.filter(kit__in=current_user_kits)
 
     context = {
@@ -77,7 +77,7 @@ def remove_medication(request, medication_id):
 
 
 def edit(request, item_type):
-    users_kits = Kit.objects.filter(user_id=request.user.id)
+    users_kits = Kit.objects.filter(user__id=request.user.id)
 
     item_types = {
         'kit': {
