@@ -39,6 +39,13 @@ def edit_kits(request):
     return render(request, 'medikit/edit_kits.html', context)
 
 
+@login_required
+def remove_kit(request, kit_id):
+    kit = get_object_or_404(Kit, id=kit_id)
+    kit.delete()
+
+    return redirect('medikit:edit_kits')
+
 # @login_required
 # def edit_one_kit(request, kit_id):
 #     kit = get_object_or_404(Kit, id=kit_id)
