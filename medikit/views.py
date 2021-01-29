@@ -50,12 +50,12 @@ def remove_kit(request, kit_id):
 @login_required
 def edit_medications(request):
     if request.method == 'POST':
-        form = AddMedicationForm(user_id=request.user.id, data=request.POST)
+        form = AddMedicationForm(user__id=request.user.id, data=request.POST)
         if form.is_valid():
             form.save()
             return http.HttpResponseRedirect(reverse('medikit:edit_medications'))
     else:
-        form = AddMedicationForm(user_id=request.user.id)
+        form = AddMedicationForm(user__id=request.user.id)
 
     current_user_kits = Kit.objects.filter(user__id=request.user.id)
     items = Medication.objects.filter(kit__in=current_user_kits)
@@ -91,7 +91,7 @@ def edit(request, item_type):
     }
 
     if request.method == 'POST':
-        form = item_types[item_type]['form'](user_id=request.user.id, data=request.POST)
+        form = item_types[item_type]['form'](user__id=request.user.id, data=request.POST)
         if form.is_valid():
             form.save()
 
