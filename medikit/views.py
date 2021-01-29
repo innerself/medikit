@@ -3,8 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
-from .forms import AddKitForm, AddDrugForm
-from .models import Kit, Drug
+from .forms import AddKitForm, AddMedicationForm
+from .models import Kit, Medication
 
 
 def home(request):
@@ -46,11 +46,34 @@ def remove_kit(request, kit_id):
 
     return redirect('medikit:edit_kits')
 
-# @login_required
-# def edit_one_kit(request, kit_id):
-#     kit = get_object_or_404(Kit, id=kit_id)
-#
-#     if request.method == 'POST'
+
+@login_required
+def edit_medications(request):
+    if request.method == 'POST':
+        form = AddMedicationForm(user_id=request.user.id, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return http.HttpResponseRedirect(reverse('medikit:edit_medications'))
+    else:
+        form = AddMedicationForm(user_id=request.user.id)
+
+    current_user_kits = Kit.objects.filter(user_id=request.user.id)
+    items = Medication.objects.filter(kit__in=current_user_kits)
+
+    context = {
+        'form': form,
+        'items': items,
+    }
+
+    return render(request, 'medikit/edit_medications.html', context)
+
+
+@login_required
+def remove_medication(request, medication_id):
+    medication = get_object_or_404(Medication, id=medication_id)
+    medication.delete()
+
+    return redirect('medikit:edit_medications')
 
 
 def edit(request, item_type):
@@ -62,8 +85,8 @@ def edit(request, item_type):
             'items': users_kits
         },
         'drug': {
-            'form': AddDrugForm,
-            'items': Drug.objects.filter(kit__in=users_kits)
+            'form': AddMedicationForm,
+            'items': Medication.objects.filter(kit__in=users_kits)
         },
     }
 
@@ -88,8 +111,8 @@ def edit_one(request, item_type, item_id):
             'class': Kit,
         },
         'drug': {
-            'form': AddDrugForm,
-            'class': Drug,
+            'form': AddMedicationForm,
+            'class': Medication,
         },
     }
 
@@ -111,21 +134,3 @@ def edit_one(request, item_type, item_id):
     }
 
     return render(request, 'medikit/edit_one_item.html', context)
-
-
-def remove(request, item_type, item_id):
-    item_types = {
-        'kit': {
-            'form': AddKitForm,
-            'class': Kit,
-        },
-        'drug': {
-            'form': AddDrugForm,
-            'class': Drug,
-        },
-    }
-
-    item = get_object_or_404(item_types[item_type]['class'], id=item_id)
-    item.delete()
-
-    return redirect('medikit:edit', item_type=item_type)

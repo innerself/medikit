@@ -22,7 +22,7 @@ class Kit(models.Model):
         super().save(*args, **kwargs)
 
 
-class Drug(models.Model):
+class Medication(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200)
     description = models.TextField()
@@ -31,7 +31,7 @@ class Drug(models.Model):
     kit = models.ForeignKey(
         Kit,
         on_delete=models.CASCADE,
-        related_name='drugs',
+        related_name='medications',
     )
 
     def __str__(self) -> str:

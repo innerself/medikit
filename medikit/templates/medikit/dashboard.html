@@ -4,20 +4,20 @@
   {% include 'medikit/kits-list.html' %}
 {% endblock %}
 
-{% block main-drugs %}
+{% block main-medications %}
   <div class="tab-content" id="v-pills-tabContent">
     {% for kit in kits %}
       <div class="tab-pane fade show"
            id="v-pills-{{ kit.slug }}"
            role="tabpanel"
            aria-labelledby="v-pills-{{ kit.slug }}-tab">
-        {% for drug in kit.drugs.all %}
-          <h4>{{ drug.name }}</h4>
-          <p>Description: {{ drug.description }}</p>
-          {% if drug.expired %}
-            <p>Expires: <span class="expired-label">EXPIRED</span> {{ drug.expiration_date }}</p>
+        {% for medication in kit.medications.all %}
+          <h4>{{ medication.name }}</h4>
+          <p>Description: {{ medication.description }}</p>
+          {% if medication.expired %}
+            <p>Expires: <span class="expired-label">EXPIRED</span> {{ medication.expiration_date }}</p>
           {% else %}
-            <p>Expires: {{ drug.expiration_date }}</p>
+            <p>Expires: {{ medication.expiration_date }}</p>
           {% endif %}
         {% endfor %}
       </div>

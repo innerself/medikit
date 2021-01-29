@@ -1,5 +1,5 @@
 from mimesis import Food, Text, Datetime
-from .models import Kit, Drug
+from .models import Kit, Medication
 
 
 def generate_drugs(kit_name: str, quantity: int = 15) -> None:
@@ -12,7 +12,7 @@ def generate_drugs(kit_name: str, quantity: int = 15) -> None:
     print(f'Creating {quantity} fake drugs')
 
     for _ in range(quantity):
-        Drug.objects.create(
+        Medication.objects.create(
             name=Food().fruit(),
             description=Text().title(),
             expiration_date=Datetime().date(start=2015, end=2025),
@@ -32,7 +32,7 @@ def clear_kits() -> None:
 
 
 def clear_drugs() -> None:
-    all_drugs = Drug.objects.all()
+    all_drugs = Medication.objects.all()
     drugs_quantity = len(all_drugs)
     all_drugs.delete()
     print(f'Deleted {drugs_quantity} drugs')

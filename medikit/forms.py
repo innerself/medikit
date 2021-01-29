@@ -1,5 +1,5 @@
 from django import forms
-from .models import Kit, Drug
+from .models import Kit, Medication
 
 
 class AddKitForm(forms.ModelForm):
@@ -8,7 +8,12 @@ class AddKitForm(forms.ModelForm):
         fields = ('name', )
 
 
-class AddDrugForm(forms.ModelForm):
+class AddMedicationForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        user_id = kwargs.pop('user_id')
+        super(AddMedicationForm, self).__init__(*args, **kwargs)
+        self.fields['kit'].queryset = Kit.objects.filter(user_id=user_id)
+
     class Meta:
-        model = Drug
+        model = Medication
         fields = ('name', 'description', 'expiration_date', 'kit')
