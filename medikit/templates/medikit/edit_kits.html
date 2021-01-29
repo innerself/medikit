@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block main-drugs %}
+  <h3>Add new kits</h3>
+  <form action="." method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <p><input type="submit" value="Add kit"></p>
+  </form>
+  {% for item in items %}
+    <div>
+      {{ item.name }}
+{#      <a href="{% url 'medikit:edit_one' item.id %}" class="btn btn-warning" role="button">Edit</a>#}
+{#      <a href="{% url 'medikit:remove' item.id %}" class="btn btn-danger" role="button">Remove</a>#}
+    </div>
+  {% endfor %}
+{% endblock %}

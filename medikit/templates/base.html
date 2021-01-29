@@ -20,6 +20,12 @@
     <a href="{% url 'medikit:home' %}" class="btn btn-primary" role="button">Home</a>
     <a href="{% url 'medikit:edit' 'kit' %}" class="btn btn-warning" role="button">Edit kits</a>
     <a href="{% url 'medikit:edit' 'drug' %}" class="btn btn-warning" role="button">Edit drugs</a>
+    <h4>{{ request.user.username }}</h4>
+    {% if request.user.is_anonymous %}
+      <a href="{% url 'medikit:login' %}">Login</a>
+    {% else %}
+      <a href="{% url 'medikit:logout' %}">Logout</a>
+    {% endif %}
   </form>
 </div>
 
