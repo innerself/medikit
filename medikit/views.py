@@ -84,7 +84,7 @@ def edit(request, item_type):
             'form': AddKitForm,
             'items': users_kits
         },
-        'drug': {
+        'medicine': {
             'form': AddMedicationForm,
             'items': Medication.objects.filter(kit__in=users_kits)
         },
@@ -110,7 +110,7 @@ def edit_one(request, item_type, item_id):
             'form': AddKitForm,
             'class': Kit,
         },
-        'drug': {
+        'medicine': {
             'form': AddMedicationForm,
             'class': Medication,
         },

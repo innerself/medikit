@@ -2,14 +2,14 @@ from mimesis import Food, Text, Datetime
 from .models import Kit, Medication
 
 
-def generate_drugs(kit_name: str, quantity: int = 15) -> None:
+def generate_medicines(kit_name: str, quantity: int = 15) -> None:
     kit = Kit.objects.filter(name=kit_name).first()
 
     if not kit:
         kit = Kit(name=kit_name)
         kit.save()
 
-    print(f'Creating {quantity} fake drugs')
+    print(f'Creating {quantity} fake medicines')
 
     for _ in range(quantity):
         Medication.objects.create(
@@ -31,15 +31,15 @@ def clear_kits() -> None:
     return None
 
 
-def clear_drugs() -> None:
-    all_drugs = Medication.objects.all()
-    drugs_quantity = len(all_drugs)
-    all_drugs.delete()
-    print(f'Deleted {drugs_quantity} drugs')
+def clear_medicines() -> None:
+    all_medicines = Medication.objects.all()
+    medicines_quantity = len(all_medicines)
+    all_medicines.delete()
+    print(f'Deleted {medicines_quantity} medicines')
 
     return None
 
 
 def clear_all() -> None:
-    clear_drugs()
+    clear_medicines()
     clear_kits()
