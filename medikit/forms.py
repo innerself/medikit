@@ -10,7 +10,7 @@ class AddKitForm(forms.ModelForm):
 
 class AddMedicationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user')
+        user = kwargs.pop('user', None) or kwargs['instance'].kit.user
         super(AddMedicationForm, self).__init__(*args, **kwargs)
         self.fields['kit'].queryset = Kit.objects.filter(user__id=user.id)
 

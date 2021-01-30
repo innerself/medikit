@@ -6,11 +6,19 @@
     {% csrf_token %}
     <p><input type="submit" value="Add medication"></p>
   </form>
-  {% for item in items %}
-    <div>
-      {{ item.name }}
-{#      <a href="{% url 'medikit:edit_one' item.id %}" class="btn btn-warning" role="button">Edit</a>#}
-      <a href="{% url 'medikit:remove_medication' item.id %}" class="btn btn-danger" role="button">Remove</a>
-    </div>
+  {% for kit in kits %}
+    <h4>{{ kit.name }}</h4>
+    <hr>
+    {% for item in kit.medications.all %}
+      <div>
+        <ul>
+          <li>{{ item.name }}
+            <a href="{% url 'medikit:edit_medication' item.id %}" class="btn btn-warning" role="button">Edit</a>
+            <a href="{% url 'medikit:remove_medication' item.id %}" class="btn btn-danger" role="button">Remove</a>
+          </li>
+        </ul>
+      </div>
+    {% endfor %}
+    <br>
   {% endfor %}
 {% endblock %}
