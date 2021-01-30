@@ -1,7 +1,5 @@
-from django import http
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse
 
 from .forms import AddKitForm, AddMedicationForm
 from .models import Kit, Medication
@@ -25,7 +23,7 @@ def edit_kits(request):
             new_kit = form.save(commit=False)
             new_kit.user = request.user
             new_kit.save()
-            return http.HttpResponseRedirect(reverse('medikit:edit_kits'))
+            return redirect('medikit:edit_kits')
     else:
         form = AddKitForm()
 
@@ -46,7 +44,7 @@ def edit_kit(request, kit_id):
         form = AddKitForm(instance=kit, data=request.POST)
         if form.is_valid():
             form.save()
-            return http.HttpResponseRedirect(reverse('medikit:edit_kits'))
+            return redirect('medikit:edit_kits')
     else:
         form = AddKitForm(instance=kit)
 
@@ -71,7 +69,7 @@ def edit_medications(request):
         form = AddMedicationForm(user=request.user, data=request.POST)
         if form.is_valid():
             form.save()
-            return http.HttpResponseRedirect(reverse('medikit:edit_medications'))
+            return redirect('medikit:edit_medications')
     else:
         form = AddMedicationForm(user=request.user)
 
@@ -92,7 +90,7 @@ def edit_medication(request, medication_id):
         form = AddMedicationForm(instance=medication, data=request.POST)
         if form.is_valid():
             form.save()
-            return http.HttpResponseRedirect(reverse('medikit:edit_medications'))
+            return redirect('medikit:edit_medications')
     else:
         form = AddMedicationForm(instance=medication)
 
