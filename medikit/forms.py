@@ -30,7 +30,11 @@ class AddMedicationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None) or kwargs['instance'].kit.user
         super(AddMedicationForm, self).__init__(*args, **kwargs)
-        self.fields['kit'].queryset = Kit.objects.filter(user__id=user.id)
+        self.fields['kit'].queryset = Kit.objects.filter(
+            user__id=user.id
+        ).order_by(
+            'name'
+        )
 
     class Meta:
         model = Medication

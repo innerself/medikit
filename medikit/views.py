@@ -1,14 +1,26 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-
+from django.http import HttpResponseForbidden
 from .forms import AddKitForm, AddMedicationForm, UserRegistrationForm
 from .models import Kit, Medication
+
+DEFAULT_KIT_NAME = 'Without kit'
 
 
 def home(request):
     if request.user.is_authenticated:
         context = {
-            'kits': Kit.objects.filter(user__id=request.user.id),
+            'kits': Kit.objects.filter(
+                user=request.user
+            ).exclude(
+                name=DEFAULT_KIT_NAME
+            ).order_by(
+                'name'
+            ),
+            'default_kit': Kit.objects.get(
+                name=DEFAULT_KIT_NAME,
+                user=request.user,
+            )
         }
         return render(request, 'medikit/dashboard.html', context)
     else:
@@ -23,7 +35,7 @@ def register(request):
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
 
-            Kit.objects.create(name='Without kit', user=new_user)
+            Kit.objects.create(name=DEFAULT_KIT_NAME, user=new_user)
 
             return render(request, 'medikit/register_done.html', {'new_user': new_user})
     else:
@@ -44,7 +56,13 @@ def edit_kits(request):
     else:
         form = AddKitForm()
 
-    items = Kit.objects.filter(user__id=request.user.id)
+    items = Kit.objects.filter(
+        user=request.user
+    ).exclude(
+        name=DEFAULT_KIT_NAME
+    ).order_by(
+        'name'
+    )
 
     context = {
         'form': form,
@@ -57,6 +75,15 @@ def edit_kits(request):
 @login_required
 def edit_kit(request, kit_id):
     kit = get_object_or_404(Kit, id=kit_id)
+
+    default_kit = Kit.objects.get(
+        name=DEFAULT_KIT_NAME,
+        user=request.user,
+    )
+
+    if kit.user != request.user or kit == default_kit:
+        return HttpResponseForbidden()
+
     if request.method == 'POST':
         form = AddKitForm(instance=kit, data=request.POST)
         if form.is_valid():
@@ -75,6 +102,15 @@ def edit_kit(request, kit_id):
 @login_required
 def remove_kit(request, kit_id):
     kit = get_object_or_404(Kit, id=kit_id)
+
+    default_kit = Kit.objects.get(
+        name=DEFAULT_KIT_NAME,
+        user=request.user,
+    )
+
+    if kit.user != request.user or kit == default_kit:
+        return HttpResponseForbidden()
+
     kit.delete()
 
     return redirect('medikit:edit_kits')
@@ -90,11 +126,23 @@ def edit_medications(request):
     else:
         form = AddMedicationForm(user=request.user)
 
-    kits = Kit.objects.filter(user__id=request.user.id)
+    kits = Kit.objects.filter(
+        user=request.user
+    ).exclude(
+        name=DEFAULT_KIT_NAME
+    ).order_by(
+        'name'
+    )
+
+    default_kit = Kit.objects.get(
+        name=DEFAULT_KIT_NAME,
+        user=request.user,
+    )
 
     context = {
         'form': form,
         'kits': kits,
+        'default_kit': default_kit,
     }
 
     return render(request, 'medikit/edit_medications.html', context)
@@ -103,6 +151,10 @@ def edit_medications(request):
 @login_required
 def edit_medication(request, medication_id):
     medication = get_object_or_404(Medication, id=medication_id)
+
+    if medication.kit.user != request.user:
+        return HttpResponseForbidden()
+
     if request.method == 'POST':
         form = AddMedicationForm(instance=medication, data=request.POST)
         if form.is_valid():
@@ -121,6 +173,10 @@ def edit_medication(request, medication_id):
 @login_required
 def remove_medication(request, medication_id):
     medication = get_object_or_404(Medication, id=medication_id)
+
+    if medication.kit.user != request.user:
+        return HttpResponseForbidden()
+
     medication.delete()
 
     return redirect('medikit:edit_medications')

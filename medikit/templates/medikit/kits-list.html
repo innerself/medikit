@@ -10,4 +10,15 @@
       {{ kit.name }}
     </a>
   {% endfor %}
+  {% if default_kit.medications.all %}
+    <a class="nav-link"
+       id="v-pills-{{ default_kit.slug }}-tab"
+       data-toggle="pill"
+       href="#v-pills-{{ default_kit.slug }}"
+       role="tab"
+       aria-controls="v-pills-{{ default_kit.slug }}"
+       aria-selected="true">
+      {{ default_kit.name }}
+    </a>
+  {% endif %}
 </div>

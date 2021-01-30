@@ -21,4 +21,18 @@
     {% endfor %}
     <br>
   {% endfor %}
+  {% if default_kit.medications.all %}
+    <h4>{{ default_kit.name }}</h4>
+    <hr>
+    {% for item in default_kit.medications.all %}
+      <div>
+        <ul>
+          <li>{{ item.name }}
+            <a href="{% url 'medikit:edit_medication' item.id %}" class="btn btn-warning" role="button">Edit</a>
+            <a href="{% url 'medikit:remove_medication' item.id %}" class="btn btn-danger" role="button">Remove</a>
+          </li>
+        </ul>
+      </div>
+    {% endfor %}
+  {% endif %}
 {% endblock %}
