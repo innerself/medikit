@@ -14,6 +14,9 @@ class Kit(models.Model):
         related_name='kits',
     )
 
+    class Meta:
+        unique_together = ['name', 'user']
+
     def __str__(self):
         return self.name
 
