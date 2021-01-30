@@ -40,6 +40,24 @@ def edit_kits(request):
 
 
 @login_required
+def edit_kit(request, kit_id):
+    kit = get_object_or_404(Kit, id=kit_id)
+    if request.method == 'POST':
+        form = AddKitForm(instance=kit, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return http.HttpResponseRedirect(reverse('medikit:edit_kits'))
+    else:
+        form = AddKitForm(instance=kit)
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'medikit/edit_kit.html', context)
+
+
+@login_required
 def remove_kit(request, kit_id):
     kit = get_object_or_404(Kit, id=kit_id)
     kit.delete()
@@ -74,34 +92,6 @@ def remove_medication(request, medication_id):
     medication.delete()
 
     return redirect('medikit:edit_medications')
-
-
-def edit(request, item_type):
-    users_kits = Kit.objects.filter(user__id=request.user.id)
-
-    item_types = {
-        'kit': {
-            'form': AddKitForm,
-            'items': users_kits
-        },
-        'medicine': {
-            'form': AddMedicationForm,
-            'items': Medication.objects.filter(kit__in=users_kits)
-        },
-    }
-
-    if request.method == 'POST':
-        form = item_types[item_type]['form'](user__id=request.user.id, data=request.POST)
-        if form.is_valid():
-            form.save()
-
-    context = {
-        'item_type': item_type,
-        'form': item_types[item_type]['form'],
-        'items': item_types[item_type]['items'],
-    }
-
-    return render(request, 'medikit/edit_all_items.html', context)
 
 
 def edit_one(request, item_type, item_id):

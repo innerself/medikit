@@ -9,7 +9,7 @@
   {% for item in items %}
     <div>
       {{ item.name }}
-{#      <a href="{% url 'medikit:edit_one' item.id %}" class="btn btn-warning" role="button">Edit</a>#}
+      <a href="{% url 'medikit:edit_kit' item.id %}" class="btn btn-warning" role="button">Edit</a>
       <a href="{% url 'medikit:remove_kit' item.id %}" class="btn btn-danger" role="button">Remove</a>
     </div>
   {% endfor %}
