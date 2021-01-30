@@ -25,8 +25,8 @@ class Kit(models.Model):
 class Medication(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200)
-    description = models.TextField()
-    expiration_date = models.DateField()
+    description = models.TextField(blank=True)
+    expiration_date = models.DateField(blank=True, null=True)
     added = models.DateTimeField(auto_now_add=True)
     kit = models.ForeignKey(
         Kit,

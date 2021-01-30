@@ -34,6 +34,10 @@ body {
   grid-row: 3;
 }
 
+.no-exp-date-label {
+  color: darkkhaki;
+}
+
 .expired-label {
   color: darkred;
   font-weight: bold;

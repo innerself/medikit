@@ -12,13 +12,21 @@
            role="tabpanel"
            aria-labelledby="v-pills-{{ kit.slug }}-tab">
         {% for medication in kit.medications.all %}
-          <h4>{{ medication.name }}</h4>
-          <p>Description: {{ medication.description }}</p>
-          {% if medication.expired %}
-            <p>Expires: <span class="expired-label">EXPIRED</span> {{ medication.expiration_date }}</p>
-          {% else %}
-            <p>Expires: {{ medication.expiration_date }}</p>
-          {% endif %}
+          <div class="medication-card">
+            <h4>{{ medication.name }}</h4>
+            {% if medication.description %}
+              <p>Description: {{ medication.description }}</p>
+            {% endif %}
+            {% if medication.expiration_date %}
+              {% if medication.expired %}
+                <p>Expires: <span class="expired-label">EXPIRED</span> {{ medication.expiration_date }}</p>
+              {% else %}
+                <p>Expires: {{ medication.expiration_date }}</p>
+              {% endif %}
+            {% else %}
+              <p class="no-exp-date-label">No expiration date</p>
+            {% endif %}
+          </div>
         {% endfor %}
       </div>
     {% endfor %}
