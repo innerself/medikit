@@ -113,11 +113,8 @@ def clear_all() -> None:
 
 
 def create_example_stuff(user):
-    without_kit = Kit.objects.get(name='Without kit')
-    example_kit = Kit.objects.create(
-        name='Example kit',
-        user=user,
-    )
+    example_kit = Kit.objects.create(name='Example kit', user=user)
+    without_kit = Kit.objects.get(name='Without kit', user=user)
 
     for kit in (example_kit, without_kit):
         for medication in EXAMPLE_STUFF[kit.name]:
