@@ -21,14 +21,14 @@ class TestUtils(TestCase):
             user=self.user,
         )
 
-    def test_generate_medicines(self):
-        utils.generate_medicines(kit_name=TEST_KIT_NAME)
-        self.assertEquals(len(Kit.objects.all()), 1)
-        self.assertEquals(len(Medication.objects.all()), 15)
-
-        utils.generate_medicines(kit_name=TEST_KIT_NAME, quantity=3)
-        self.assertEquals(len(Kit.objects.all()), 1)
-        self.assertEquals(len(Medication.objects.all()), 18)
+    # def test_generate_medicines(self):
+    #     utils.generate_medicines(kit_name=TEST_KIT_NAME)
+    #     self.assertEquals(len(Kit.objects.all()), 1)
+    #     self.assertEquals(len(Medication.objects.all()), 15)
+    #
+    #     utils.generate_medicines(kit_name=TEST_KIT_NAME, quantity=3)
+    #     self.assertEquals(len(Kit.objects.all()), 1)
+    #     self.assertEquals(len(Medication.objects.all()), 18)
 
     def test_create_example_stuff(self):
         utils.create_example_stuff(self.user)
