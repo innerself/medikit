@@ -39,3 +39,6 @@ class AddMedicationForm(forms.ModelForm):
     class Meta:
         model = Medication
         fields = ('name', 'description', 'expiration_date', 'kit')
+        widgets = {
+            'expiration_date': forms.SelectDateWidget,
+        }
