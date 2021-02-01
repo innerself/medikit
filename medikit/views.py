@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseForbidden
 from .forms import AddKitForm, AddMedicationForm, UserRegistrationForm
 from .models import Kit, Medication
+from .utils import create_example_stuff
 
 DEFAULT_KIT_NAME = 'Without kit'
 
@@ -36,6 +37,7 @@ def register(request):
             new_user.save()
 
             Kit.objects.create(name=DEFAULT_KIT_NAME, user=new_user)
+            create_example_stuff(new_user)
 
             return render(request, 'medikit/register_done.html', {'new_user': new_user})
     else:
@@ -81,6 +83,7 @@ def edit_kit(request, kit_id):
         user=request.user,
     )
 
+    # TODO create a decorator
     if kit.user != request.user or kit == default_kit:
         return HttpResponseForbidden()
 
@@ -108,6 +111,7 @@ def remove_kit(request, kit_id):
         user=request.user,
     )
 
+    # TODO create a decorator
     if kit.user != request.user or kit == default_kit:
         return HttpResponseForbidden()
 
@@ -152,6 +156,7 @@ def edit_medications(request):
 def edit_medication(request, medication_id):
     medication = get_object_or_404(Medication, id=medication_id)
 
+    # TODO create a decorator
     if medication.kit.user != request.user:
         return HttpResponseForbidden()
 
@@ -174,6 +179,7 @@ def edit_medication(request, medication_id):
 def remove_medication(request, medication_id):
     medication = get_object_or_404(Medication, id=medication_id)
 
+    # TODO create a decorator
     if medication.kit.user != request.user:
         return HttpResponseForbidden()
 
