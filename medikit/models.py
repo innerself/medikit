@@ -8,6 +8,7 @@ from pytils.translit import slugify
 class Kit(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200)
+    description = models.TextField(blank=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -30,6 +31,8 @@ class Medication(models.Model):
     slug = models.SlugField(max_length=200)
     description = models.TextField(blank=True)
     expiration_date = models.DateField(blank=True, null=True)
+    keep_in_cold = models.BooleanField(default=False)
+    do_not_freeze = models.BooleanField(default=False)
     added = models.DateTimeField(auto_now_add=True)
     kit = models.ForeignKey(
         Kit,

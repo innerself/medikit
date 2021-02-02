@@ -12,21 +12,7 @@
          role="tabpanel"
          aria-labelledby="v-pills-{{ kit.slug }}-tab">
       {% for medication in kit.medications.all %}
-        <div class="medication-card">
-          <h4>{{ medication.name }}</h4>
-          {% if medication.description %}
-            <p>Description: {{ medication.description }}</p>
-          {% endif %}
-          {% if medication.expiration_date %}
-            {% if medication.expired %}
-              <p>Expires: <span class="expired-label">EXPIRED</span> {{ medication.expiration_date }}</p>
-            {% else %}
-              <p>Expires: {{ medication.expiration_date }}</p>
-            {% endif %}
-          {% else %}
-            <p class="no-exp-date-label">No expiration date</p>
-          {% endif %}
-        </div>
+        {% include 'medikit/dash-med-item.html' %}
       {% endfor %}
     </div>
   {% endfor %}
@@ -36,21 +22,7 @@
          role="tabpanel"
          aria-labelledby="v-pills-{{ default_kit.slug }}-tab">
     {% for medication in default_kit.medications.all %}
-      <div class="medication-card">
-        <h4>{{ medication.name }}</h4>
-        {% if medication.description %}
-          <p>Description: {{ medication.description }}</p>
-        {% endif %}
-        {% if medication.expiration_date %}
-          {% if medication.expired %}
-            <p>Expires: <span class="expired-label">EXPIRED</span> {{ medication.expiration_date }}</p>
-          {% else %}
-            <p>Expires: {{ medication.expiration_date }}</p>
-          {% endif %}
-        {% else %}
-          <p class="no-exp-date-label">No expiration date</p>
-        {% endif %}
-      </div>
+      {% include 'medikit/dash-med-item.html' %}
     {% endfor %}
   {% endif %}
 </div>

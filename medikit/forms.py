@@ -23,7 +23,7 @@ class UserRegistrationForm(forms.ModelForm):
 class AddKitForm(forms.ModelForm):
     class Meta:
         model = Kit
-        fields = ('name', )
+        fields = ('name', 'description')
 
 
 class AddMedicationForm(forms.ModelForm):
@@ -38,7 +38,14 @@ class AddMedicationForm(forms.ModelForm):
 
     class Meta:
         model = Medication
-        fields = ('name', 'description', 'expiration_date', 'kit')
+        fields = (
+            'name',
+            'description',
+            'expiration_date',
+            'keep_in_cold',
+            'do_not_freeze',
+            'kit',
+        )
         widgets = {
             'expiration_date': forms.SelectDateWidget,
         }

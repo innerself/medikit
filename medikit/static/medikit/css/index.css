@@ -34,11 +34,46 @@ body {
   grid-row: 3;
 }
 
-.no-exp-date-label {
-  color: darkkhaki;
+.medication-card {
+  border: black solid 1px;
+  width: 50%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr 2fr 1fr;
 }
 
-.expired-label {
-  color: darkred;
-  font-weight: bold;
+.medication-name {
+  grid-row: 1;
+  grid-column: 1 / 4;
+}
+
+.medication-do-not-freeze {
+  grid-row: 1;
+  grid-column: 4;
+}
+
+.medication-keep-in-cold {
+  grid-row: 1;
+  grid-column: 5;
+}
+
+.medication-description {
+  grid-row: 2;
+  grid-column: 1 / 6;
+}
+
+.medication-expiration-date,
+.medication-no-expiratioln-date {
+  grid-row: 3;
+  grid-column: 1 / 4;
+}
+
+.icon-keep-in-cold {
+  font-size: 2em;
+  color: #007bff;
+}
+
+.icon-do-not-freeze {
+  font-size: 2em;
+  color: #ffc107;
 }

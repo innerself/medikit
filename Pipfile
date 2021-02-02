@@ -27,6 +27,7 @@ gunicorn = "*"
 social-auth-app-django = "*"
 psycopg2-binary = "*"
 sentry-sdk = "*"
+fontawesome-free = "*"
 
 [requires]
 python_version = "3.8"

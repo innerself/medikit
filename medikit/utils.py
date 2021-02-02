@@ -11,6 +11,7 @@ class ExampleMed:
     name: str
     description: str
     keep_in_cold: bool = False
+    do_not_freeze: bool = False
     # TODO expires in some period after opening
 
 

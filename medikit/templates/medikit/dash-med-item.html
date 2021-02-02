@@ -1,0 +1,17 @@
+<div class="medication-card">
+  <div class="medication-name">{{ medication.name }}</div>
+  {% if medication.do_not_freeze %}
+    <span class="medication-do-not-freeze"><i class="far fa-sun"></i></span>
+  {% endif %}
+  {% if medication.keep_in_cold %}
+    <span class="medication-keep-in-cold"><i class="far fa-snowflake"></i></span>
+  {% endif %}
+  {% if medication.description %}
+    <div class="medication-description">Description: {{ medication.description }}</div>
+  {% endif %}
+  {% if medication.expiration_date %}
+    <div class="medication-expiration-date">{{ medication.expiration_date }}</div>
+  {% else %}
+    <div class="medication-no-expiratioln-date">No expiration date</div>
+  {% endif %}
+</div>
