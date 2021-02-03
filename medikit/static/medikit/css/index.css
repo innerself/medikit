@@ -4,29 +4,35 @@ body {
   grid-template-columns: 1fr 5fr;
   grid-template-rows: 0.5fr 10fr 1fr;
   grid-gap: 25px;
+  background-color: #f3f5f9;
 }
 
 #header-logo {
   grid-column: 1;
   grid-row: 1;
-  max-width: 10%;
-  max-height: 10%;
 }
 
 #header-controls {
   grid-column: 2 / 3;
   grid-row: 1;
   justify-self: right;
+  /*background-color: #d5dce9;*/
+}
+
+#main {
+  grid-row: 2;
+  grid-column: 2 / 5;
+  display: grid;
+  grid-column-gap: 2em;
+  grid-template-columns: 1fr 5fr;
 }
 
 #main-kits {
   grid-column: 1;
-  grid-row: 2;
 }
 
 #main-medications {
   grid-column: 2;
-  grid-row: 2;
 }
 
 #footer {
@@ -35,45 +41,47 @@ body {
 }
 
 .medication-card {
-  border: black solid 1px;
   width: 50%;
+  margin-bottom: 1em;
+  background-color: #fefefe;
+  border-radius: 15px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: 1fr 2fr 1fr;
+  grid-template-rows: 1fr minmax(2fr, 300px) 1fr;
 }
 
 .medication-name {
   grid-row: 1;
   grid-column: 1 / 4;
+  font-size: 2em;
+  margin-left: 0.5em;
 }
 
 .medication-do-not-freeze {
   grid-row: 1;
   grid-column: 4;
+  font-size: 1.5em;
+  color: #ffc107;
+  margin: auto;
 }
 
 .medication-keep-in-cold {
   grid-row: 1;
   grid-column: 5;
+  font-size: 1.5em;
+  color: #007bff;
+  margin: auto;
 }
 
 .medication-description {
   grid-row: 2;
   grid-column: 1 / 6;
+  margin: 0.5em 1em;
 }
 
 .medication-expiration-date,
-.medication-no-expiratioln-date {
+.medication-no-expiration-date {
   grid-row: 3;
   grid-column: 1 / 4;
-}
-
-.icon-keep-in-cold {
-  font-size: 2em;
-  color: #007bff;
-}
-
-.icon-do-not-freeze {
-  font-size: 2em;
-  color: #ffc107;
+  margin: 0.5em 1em;
 }

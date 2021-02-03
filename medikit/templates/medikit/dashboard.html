@@ -1,31 +1,33 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block main-kits %}
   {% include 'medikit/kits-list.html' %}
 {% endblock %}
 
 {% block main-medications %}
   <div class="tab-content" id="v-pills-tabContent">
-  {% for kit in kits %}
-    <div class="tab-pane fade show"
-         id="v-pills-{{ kit.slug }}"
-         role="tabpanel"
-         aria-labelledby="v-pills-{{ kit.slug }}-tab">
-      {% for medication in kit.medications.all %}
-        {% include 'medikit/dash-med-item.html' %}
-      {% endfor %}
-    </div>
-  {% endfor %}
-  {% if default_kit.medications.all %}
-    <div class="tab-pane fade show"
-         id="v-pills-{{ default_kit.slug }}"
-         role="tabpanel"
-         aria-labelledby="v-pills-{{ default_kit.slug }}-tab">
-    {% for medication in default_kit.medications.all %}
-      {% include 'medikit/dash-med-item.html' %}
+    {% for kit in kits %}
+      <div class="tab-pane fade show"
+           id="v-pills-{{ kit.slug }}"
+           role="tabpanel"
+           aria-labelledby="v-pills-{{ kit.slug }}-tab">
+        {% for medication in kit.medications.all %}
+          {% include 'medikit/dash-med-item.html' %}
+        {% endfor %}
+      </div>
     {% endfor %}
-  {% endif %}
-</div>
+    {% if default_kit.medications.all %}
+      <div class="tab-pane fade show"
+           id="v-pills-{{ default_kit.slug }}"
+           role="tabpanel"
+           aria-labelledby="v-pills-{{ default_kit.slug }}-tab">
+        {% for medication in default_kit.medications.all %}
+          {% include 'medikit/dash-med-item.html' %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
 {% endblock %}
 
 <div id="footer">footer</div>

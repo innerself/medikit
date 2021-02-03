@@ -10,34 +10,29 @@
 </head>
 <body>
 <div id="header-logo">
-  {#    <img src="{% static 'medikit/img/first-aid-kit.svg' %}" alt="medicine kit">#}
+{#  <span class="fas fa-medkit"></span>#}
 </div>
 <div id="header-controls">
-  <form class="form-inline">
-{#    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
-{#    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">#}
-{#      <img src="{% static 'medikit/img/search.svg' %}" alt="search icon ">#}
-{#    </button>#}
-    <a href="{% url 'medikit:home' %}" class="btn btn-primary" role="button">Home</a>
-    <a href="{% url 'medikit:edit_kits' %}" class="btn btn-warning" role="button">Edit kits</a>
-    <a href="{% url 'medikit:edit_medications' %}" class="btn btn-warning" role="button">Edit medications</a>
-    <h4>{{ request.user.username }}</h4>
+    <a href="{% url 'medikit:home' %}" class="btn btn-outline-primary" role="button">Home</a>
+    <a href="{% url 'medikit:edit_kits' %}" class="btn btn-outline-secondary" role="button">Edit kits</a>
+    <a href="{% url 'medikit:edit_medications' %}" class="btn btn-outline-secondary" role="button">Edit medications</a>
     {% if request.user.is_anonymous %}
-      <a href="{% url 'medikit:login' %}">Login</a>
+      <a href="{% url 'medikit:login' %}" class="btn btn-outline-danger" role="button">Login</a>
     {% else %}
-      <a href="{% url 'medikit:logout' %}">Logout</a>
+      <a href="{% url 'medikit:logout' %}" class="btn btn-outline-danger" role="button">Logout</a>
     {% endif %}
-  </form>
 </div>
 
-<div id="main-kits">
-  {% block main-kits %}
-  {% endblock %}
-</div>
+<div id="main">
+  <div id="main-kits">
+    {% block main-kits %}
+    {% endblock %}
+  </div>
 
-<div id="main-medications">
-  {% block main-medications %}
-  {% endblock %}
+  <div id="main-medications">
+    {% block main-medications %}
+    {% endblock %}
+  </div>
 </div>
 
 <script src="{% static "medikit/js/jquery-3.4.1.min.js" %}"></script>
