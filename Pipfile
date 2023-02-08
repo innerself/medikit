@@ -28,7 +28,7 @@ social-auth-app-django = "*"
 psycopg2-binary = "*"
 sentry-sdk = "*"
 fontawesome-free = "*"
-cryptography = "==3.4.4"
+cryptography = "==39.0.1"
 
 [requires]
 python_version = "3.8"
